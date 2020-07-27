@@ -1,10 +1,35 @@
-<h2>@hero.Name.ToUpper() Details</h2>
+@inject HttpClient Http
+<h2>My Heroes</h2>
+@if (heroes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul class="heroes">
+        @foreach (var hero in heroes)
+        {
+            <li>
+                <span class="badge">@hero.Id</span> @hero.Name
+            </li>
+        }
+    </ul>
+}
+
+@* <h2>@hero.Name.ToUpper() Details</h2>
 <div><span>id: </span>@hero.Id</div>
-<div><label>name:  <input @bind="hero.Name" placeholder="Name"/></label></div>
+<div><label>name:  <input @bind="hero.Name" placeholder="Name"/></label></div> *@
 
 @code{
-    private Hero hero = new Hero(){
+    @* private Hero hero = new Hero(){
     Id = 1,
     Name = "Windstorm"
-  };
+  }; *@
+
+    private Hero[] heroes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        heroes = await Http.GetFromJsonAsync<Hero[]>("sample-data/heroes.json");
+    }
 }
