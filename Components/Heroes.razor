@@ -17,15 +17,8 @@ else
     </ul>
 }
 
-@if(SelectedHero != null){
-  <h2>@SelectedHero.Name.ToUpper() Details</h2>
-  <div><span>id: </span>@SelectedHero.Id</div>
-  <div>
-    <label>name:
-      <input @bind ="SelectedHero.Name" placeholder="Name"/>
-    </label>
-  </div>
-}
+
+<HeroDetail SelectedHero=@SelectedHero></HeroDetail>
 
 @code{
     private Hero[] heroes;
