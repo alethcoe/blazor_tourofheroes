@@ -1,4 +1,6 @@
 @inject IHeroService client;
+@inject IMessagingService _MessagingService;
+
 <h2>My Heroes</h2>
 @if (heroes == null)
 {
@@ -29,8 +31,9 @@ else
     }
 
     private Hero SelectedHero = null;
-    private void OnSelect(Hero hero){
+    private async Task OnSelect(Hero hero){
         SelectedHero = hero;
+        await _MessagingService.Add($"Hero selected {hero.Name}");
     }
 }
 
