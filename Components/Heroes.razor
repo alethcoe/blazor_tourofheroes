@@ -1,4 +1,4 @@
-@inject HttpClient Http
+@inject IHeroService client;
 <h2>My Heroes</h2>
 @if (heroes == null)
 {
@@ -25,7 +25,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        heroes = await Http.GetFromJsonAsync<Hero[]>("sample-data/heroes.json");
+          heroes = await client.GetHeroes();
     }
 
     private Hero SelectedHero = null;
