@@ -10,13 +10,16 @@ namespace tour_of_heroes.Services
     public class HeroService : IHeroService
     {
         private readonly HttpClient Http;
+        private readonly IMessagingService _MessagingService;
 
-        public HeroService(HttpClient client)
+        public HeroService(HttpClient client, IMessagingService messagingService)
         {
             Http = client;
+            _MessagingService = messagingService;
         }
         public async Task<Hero[]> GetHeroes()
         {
+            await _MessagingService.Add("Heroes Service: Heroes Fetched");
             return await Http.GetFromJsonAsync<Hero[]>("sample-data/heroes.json");
         }
     }
