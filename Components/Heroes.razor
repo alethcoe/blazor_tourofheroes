@@ -1,5 +1,7 @@
 @inject IHeroService client;
 @inject IMessagingService _MessagingService;
+@inject NavigationManager NavigationManager
+@page "/heroes"
 
 <h2>My Heroes</h2>
 @if (heroes == null)
@@ -11,8 +13,7 @@ else
     <ul class="heroes">
         @foreach (var hero in heroes)
         {
-            <li @onclick="@(() => OnSelect(hero))" 
-                class="@((hero == SelectedHero ? "selected" : ""))">
+            <li @onclick="@(() => OnSelect(hero))">
                 <span class="badge" >@hero.Id</span> @hero.Name
             </li>
         }
@@ -20,7 +21,7 @@ else
 }
 
 
-<HeroDetail SelectedHero=@SelectedHero></HeroDetail>
+@* <HeroDetail SelectedHero=@SelectedHero></HeroDetail> *@
 
 @code{
     private Hero[] heroes;
@@ -30,10 +31,9 @@ else
           heroes = await client.GetHeroes();
     }
 
-    private Hero SelectedHero = null;
     private async Task OnSelect(Hero hero){
-        SelectedHero = hero;
         await _MessagingService.Add($"Hero selected {hero.Name}");
+        NavigationManager.NavigateTo("/herodetail/" + hero.Name);
     }
 }
 
