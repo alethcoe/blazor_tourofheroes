@@ -1,8 +1,6 @@
 name: .NET Core
 
-on:
-  push:
-    branches: [ master, unit_test ]
+on: push
   pull_request:
     branches: [ master ]
 
