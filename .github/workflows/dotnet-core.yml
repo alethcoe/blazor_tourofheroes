@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build ./TourOfHeroesTests/ --configuration Release --no-restore
     - name: Test
-      run: dotnet test ./TourOfHeroesTests/TourOfHeroesTests.sln restore --verbosity normal
+      run: dotnet test ./TourOfHeroesTests/TourOfHeroesTests.sln --verbosity normal
