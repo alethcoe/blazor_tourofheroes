@@ -1,8 +1,7 @@
 @page "/herodetail/{Name}"
 @inject IHeroService client;
-@inject IJSRuntime JSRuntime;
 
-
+<h2>Test</h2>
 @if(SelectedHero != null){
   <h2>@SelectedHero.Name.ToUpper() Details</h2>
   <div><span>id: </span>@SelectedHero.Id</div>
